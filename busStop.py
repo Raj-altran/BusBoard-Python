@@ -2,7 +2,7 @@
 from bus import Bus
 
 
-class BusStop():
+class BusStop:
     __atcocode = "490000077E"
     __smscode = "58234"
     __name = "Euston Station (Stop E)"
@@ -40,3 +40,4 @@ class BusStop():
 
     def sort_departures(self):
         self.__departures.sort(key=lambda bus: bus.get_time(), reverse=False)
+
