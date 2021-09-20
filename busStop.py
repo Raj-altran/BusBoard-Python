@@ -39,5 +39,5 @@ class BusStop:
             bus.printout()
 
     def sort_departures(self):
-        self.__departures.sort(key=lambda bus: bus.get_time(), reverse=False)
+        self.__departures.sort(key=lambda bus: bus.get_time())
 
