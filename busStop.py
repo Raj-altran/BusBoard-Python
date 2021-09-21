@@ -34,9 +34,13 @@ class BusStop:
             for busEvent in dict["departures"][item]:
                 self.__departures.append(Bus(busEvent))
 
-    def printout_departures(self):
-        for bus in self.__departures[:5]:
+    def printout_departures(self, cutoff):
+        print(f"--{self.__name}--")
+        for bus in self.__departures[:cutoff]:
             bus.printout()
+        if self.__departures == []:
+            print("No scheduled busses found")
+        print("-"*20)
 
     def sort_departures(self):
         self.__departures.sort(key=lambda bus: bus.get_time())
