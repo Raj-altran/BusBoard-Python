@@ -36,3 +36,16 @@ def latLong_to_Atcocodes(lat, long, limit=2):
             atcocode = stop["atcocode"]
             output.append(atcocode)
     return output[:limit]
+
+
+def postcode_to_atcocodes(postcode):
+    lat, long = postcode_to_LatLong(postcode)
+    return latLong_to_Atcocodes(lat, long)
+
+
+def print_error(json):
+    if "error" in json:
+        print(json["error"])
+    else:
+        print("Bad input, try again.")
+    print("-" * 20)

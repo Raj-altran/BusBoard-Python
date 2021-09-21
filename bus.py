@@ -34,5 +34,12 @@ class Bus():
         output = f"{self.__line} {self.__mode} \t {destination} \t {self.__datetime.strftime('%H:%M')}"
         print(output)
 
+    def getout(self):
+        destination = self.__direction+" "*20
+        destination = destination[:20]
+
+        output = f"{self.__line} {self.__mode} \t {destination} \t {self.__datetime.strftime('%H:%M')}"
+        return output
+
     def get_time(self):
         return self.__datetime
