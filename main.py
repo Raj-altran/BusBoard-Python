@@ -1,10 +1,13 @@
 import requests
 from busStop import BusStop
 from constants import *
+import web
+from flask import Flask, render_template, request
 
 
 def main():
-    print("Welcome to BusBoard.")
+    app = Flask(__name__)
+    app.run()
 
     live = True
     while live:
@@ -52,7 +55,7 @@ def print_error(json):
 
 
 def postcode_to_LatLong(post_code):
-    post_code = post_code.replace(" ","")
+    post_code = post_code.replace(" ", "")
     r = requests.get(f"http://api.postcodes.io/postcodes?q={post_code}")
     data = r.json()
     if data["result"] is None:
@@ -72,7 +75,7 @@ def latLong_to_Atcocodes(lat, long):
     if "error" in data:
         print("input error")
         print(data["error"])
-        print("-"*20)
+        print("-" * 20)
     else:
         bus_stops = data["member"]
         for stop in bus_stops:
