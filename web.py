@@ -11,7 +11,9 @@ def index():
 
 @app.route("/busInfo")
 def busInfo():
-    postcode = Postcode(request.args.get('postcode'))
+    stop_num = request.args.get('stop_num')
+    bus_num = request.args.get('bus_num')
+    postcode = Postcode(request.args.get('postcode'), int(stop_num), int(bus_num))
     bus_stops = postcode.get_bus_stops()
     lat_longs = postcode.get_lat_longs()
 

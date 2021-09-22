@@ -27,11 +27,11 @@ class BusStop:
     def sort_departures(self):
         self.__departures.sort(key=lambda bus: bus.get_time())
 
-    def num_dir_time(self):
+    def num_dir_time(self, limit=5):
         output = []
         for bus in self.__departures:
             output.append([bus.get_number(), bus.get_direction(), bus.get_time()])
-        return output[:5]
+        return output[:limit]
 
     def get_name(self):
         return self.__name
