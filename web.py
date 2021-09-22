@@ -1,9 +1,5 @@
 from flask import Flask, render_template, request
-
-from busStop import BusStop
-# from dataVeiwerWeb import *
 from postcode import Postcode
-from requesters import *
 
 app = Flask(__name__)
 
@@ -16,12 +12,10 @@ def index():
 @app.route("/busInfo")
 def busInfo():
     postcode = Postcode(request.args.get('postcode'))
-    if postcode.is_empty():
-        bus_stops = {"Postcode not recognised": [["-", "-", "-"]]}
-    else:
-        bus_stops = postcode.get_bus_stops()
+    bus_stops = postcode.get_bus_stops()
+    lat_longs = postcode.get_lat_longs()
 
-    return render_template('info.html', postcode=postcode, bus_stops=bus_stops)
+    return render_template('info.html', postcode=postcode, bus_stops=bus_stops, lat_longs=lat_longs)
 
 
 if __name__ == "__main__": app.run()

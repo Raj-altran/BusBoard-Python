@@ -1,7 +1,4 @@
-from busStop import BusStop
-from requesters import *
 from web import *
-from flask import Flask, render_template, request
 
 
 def main():

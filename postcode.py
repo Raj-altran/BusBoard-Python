@@ -11,9 +11,13 @@ class Postcode:
     def __init__(self, postcode):
         self.__code = postcode
         self.__lat, self.__long = postcode_to_LatLong(postcode)
+
+        self.__bus_stops = []
         atcocodes = latLong_to_Atcocodes(self.__lat, self.__long)
         for code in atcocodes:
-            self.__bus_stops.append(BusStop(code))
+            bus_stop = BusStop(code)
+            bus_stop.sort_departures()
+            self.__bus_stops.append(bus_stop)
 
     def __str__(self):
         return self.__code
@@ -22,8 +26,16 @@ class Postcode:
         return self.__bus_stops == []
 
     def get_bus_stops(self):
-        output1 = {}
-        for stop in self.__bus_stops:
-            output1[(stop.get_name())] = stop.num_dir_time()
-        return output1
+        output = {}
+        if not self.__bus_stops:
+            output = {"Postcode not recognised": [["-", "-", "-"]]}
+        else:
+            for stop in self.__bus_stops:
+                output[(stop.get_name())] = stop.num_dir_time()
+        return output
 
+    def get_lat_longs(self):
+        output = []
+        for stop in self.__bus_stops:
+            output.append(stop.get_lat_long())
+        return output
