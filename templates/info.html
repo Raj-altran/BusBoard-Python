@@ -1,15 +1,31 @@
 {% extends "layout.html" %}
 {% block title %}Bus Information{% endblock %}
 {% block content %}
+<meta http-equiv="refresh" content="30" >
 <div class="container body-content">
     <h2>Bus Information</h2>
     <div>
         <p>You entered postcode <span>{{ postcode }}</span></p>
     </div>
+    {% for stop in bus_stops %}
     <div>
-        {% for stop in bus_stops %}
-        <p>{{stop}}    </p>
-        {% endfor %}
+        <h2>{{stop}}    </h2>
     </div>
+    <table>
+        <tr>
+            <th>     Number     </th>
+            <th>     Destination     </th>
+            <th>     time     </th>
+        </tr>
+        {% for row in bus_stops[stop] %}
+        <tr>
+            <td>{{row[0]}}</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endfor %}
+
 </div>
 {% endblock %}

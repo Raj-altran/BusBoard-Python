@@ -39,6 +39,8 @@ def latLong_to_Atcocodes(lat, long, limit=2):
 
 
 def postcode_to_atcocodes(postcode):
+    if postcode == "":
+        return []
     lat, long = postcode_to_LatLong(postcode)
     return latLong_to_Atcocodes(lat, long)
 

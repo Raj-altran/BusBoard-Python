@@ -1,5 +1,6 @@
 # Bus stop class. Characterises the bus stop and lists it's departures.
 from bus import Bus
+from requesters import request_bus_stop
 
 
 class BusStop:
@@ -19,7 +20,9 @@ class BusStop:
     }
     __departures = []
 
-    def __init__(self, dict):
+    def __init__(self, atcocode):
+        dict = request_bus_stop(atcocode)
+
         self.__atcocode = dict["atcocode"]
         self.__smscode = dict["smscode"]
         self.__name = dict["name"]
@@ -40,7 +43,7 @@ class BusStop:
             bus.printout()
         if not self.__departures:
             print("No scheduled busses found")
-        print("-"*20)
+        print("-" * 20)
 
     def getout_departures(self, cutoff=5):
         output = [f"--{self.__name}--"]
@@ -48,10 +51,18 @@ class BusStop:
             output.append(bus.getout())
         if not self.__departures:
             output.append("No scheduled busses found")
-        output.append("-"*20)
+        output.append("-" * 20)
 
         return output
 
     def sort_departures(self):
         self.__departures.sort(key=lambda bus: bus.get_time())
 
+    def num_dir_time(self):
+        output = []
+        for bus in self.__departures:
+            output.append([bus.get_number(), bus.get_direction(), bus.get_time()])
+        return output
+
+    def get_name(self):
+        return self.__name

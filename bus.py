@@ -28,18 +28,24 @@ class Bus():
         self.__datetime = datetime(time[0], time[1], time[2], time[3], time[4], 0)
 
     def printout(self):
-        destination = self.__direction+" "*20
+        destination = self.__direction + " " * 20
         destination = destination[:20]
 
         output = f"{self.__line} {self.__mode} \t {destination} \t {self.__datetime.strftime('%H:%M')}"
         print(output)
 
     def getout(self):
-        destination = self.__direction+" "*20
+        destination = self.__direction + " " * 20
         destination = destination[:20]
 
         output = f"{self.__line} {self.__mode} \t {destination} \t {self.__datetime.strftime('%H:%M')}"
         return output
 
+    def get_number(self):
+        return self.__line
+
+    def get_direction(self):
+        return self.__direction
+
     def get_time(self):
-        return self.__datetime
+        return self.__datetime.strftime("%H:%M")
